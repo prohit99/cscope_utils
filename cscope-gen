@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Removing cscope.files"
+rm -f cscope.files
+
+echo "Create the cscope.files"
+find -L . -type f -iname '*.[ch]' \
+-o -name '*.y' \
+-o -name '*.lex' \
+> cscope.files
+
+find -L /usr/include -type f -iname '*.h' >> csscope.files
+
+#sort the files
+echo "Sort the cscope.files"
+sort -u cscope.files > cscope.files.sorted
+mv cscope.files.sorted cscope.files
