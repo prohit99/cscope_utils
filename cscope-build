@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Generate cscope.files
+echo "Generate cscope.files DB"
+cscope_utils/cscope-gen
+
+#create tags from cscope.files list
+echo "create tags file"
+rm -f tags
+ctags -L cscope.files
+
+#remove cscope DB files
+echo "Removing cscope DB files"
+rm -f *cscope*out
+
+# The -b flag tells cscope to just build the db, and not launch the cscope gui. The -q flag causes an aditional, 'inveerted index' file to be created, which makes
+# searched run much faster for large databases. Finally -k sets cscope's 'kernel' mode -- it will not look in /usr/include for any header files that are #included
+# in your source files ( this is mostly useful when using cscope with OS or C library source code).
+
+# create the cscope db
+cscope -Rbq 2>/dev/null
