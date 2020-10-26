@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [[ $1 = '-f' ]]
+then
+  echo "Build cscope db"
+  cscope_utils/cscope-build
+fi
+
+# To update the db later, just execute
+cscope -d
